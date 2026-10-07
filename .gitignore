@@ -1,0 +1,22 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Local secrets and machine-specific config
+.env
+.env.*
+!.env.example
+agentgate.local.yml
+
+# Run artifacts
+.agentgate/
+baseline.json
+results.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
