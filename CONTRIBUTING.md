@@ -82,6 +82,36 @@ If the check already exists in another language or a test harness, use
 Reports go through `renderConsoleReport` / `renderJsonReport` / `renderGitHubAnnotations`.
 Add a sibling function rather than extending an existing one with a format flag.
 
+## Translations
+
+`README.md` (English) is the source of truth. `README.zh-CN.md` is maintained alongside it.
+
+Run `npm run readme:check` after editing either. It compares structural signatures —
+heading levels and code-fence languages, in order — and fails if a translation has drifted.
+
+```
+npm run readme:check
+```
+
+When you change `README.md`, the check will fail until every translation is updated. That
+is the intended behaviour: a translation that silently falls behind makes the project look
+unmaintained to non-English readers.
+
+The check deliberately does **not** compare heading text, because a translation is supposed
+to differ there. It catches the failures that matter:
+
+- a section added, removed or reordered in only one language
+- a heading promoted or demoted to the wrong level
+- a code sample switched from one language to another
+- mojibake (a replacement character or an unpaired surrogate), which is caught separately
+  because it renders as a visible black diamond and is easy to introduce
+
+Keep the language switcher line at the top of every file, and keep technical terms
+(`pass^k`, `Mean@k`, `runner`, `grader`) untranslated where they name an actual API or metric.
+
+Adding a language means adding an entry to `TRANSLATIONS` in `scripts/check-readme-sync.mjs`
+and a `README.<locale>.md` file.
+
 ## Tests
 
 Uses the Node built-in test runner. No framework dependency.

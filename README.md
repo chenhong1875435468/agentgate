@@ -2,6 +2,8 @@
 
 **A reliability gate for AI agents. It measures Pass^k, not Mean@k.**
 
+English · [简体中文](./README.zh-CN.md)
+
 Benchmarks and most eval tools report `Mean@k`: the average success rate over k attempts.
 That number flatters non-deterministic systems. A task that succeeds 3 times out of 5
 contributes 60% to the mean, while a real user asking the same question twice gets a

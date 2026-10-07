@@ -22,6 +22,17 @@ jobs:
       - run: npm run typecheck
       - run: npm test
 
+  docs:
+    # A translation that drifts out of sync silently makes the project look
+    # unmaintained to non-English readers, so treat it as a build failure.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run readme:check
+
   smoke:
     # Runs the bundled example end to end so a broken build or a bad default
     # config cannot reach a release unnoticed.
