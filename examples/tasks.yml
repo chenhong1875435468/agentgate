@@ -1,0 +1,63 @@
+# Example task suite.
+#
+# The mix below reproduces the failure profile AgentGate is designed to catch:
+# most tasks are answered reliably, a few flip between attempts, and one never
+# works. Run it and you should see a wide consistency gap despite a respectable
+# Mean@k, which is exactly the pattern that slips through a Mean@k review.
+
+tasks:
+  - id: order-status-001
+    label: order-lookup
+    input: where is my order
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: order-status-002
+    label: order-lookup
+    input: track my package
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: refund-policy-001
+    label: policy
+    input: what is your refund policy
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: cancel-subscription-001
+    label: account
+    input: cancel my subscription
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: flaky-lookup-001
+    label: order-lookup
+    input: check stock availability
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: flaky-retry-001
+    label: account
+    input: retry my last payment
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: flaky-lookup-002
+    label: order-lookup
+    input: lookup my invoice number
+    expected: handled
+    metadata:
+      grader: contains
+
+  - id: unsupported-legacy-001
+    label: legacy
+    input: migrate my legacy account
+    expected: handled
+    metadata:
+      grader: contains
