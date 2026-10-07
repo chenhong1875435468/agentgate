@@ -86,6 +86,24 @@ Add a sibling function rather than extending an existing one with a format flag.
 
 Uses the Node built-in test runner. No framework dependency.
 
+```bash
+npm test           # compiles to dist-test/, then runs the suite
+npm run pretest    # compile only
+```
+
+**When you add a test file, register it in the `test` script in package.json.**
+
+The script lists test files explicitly rather than using a glob or a directory:
+
+```json
+"test": "npm run pretest && node --test dist-test/test/metrics.test.js dist-test/test/agentgate.test.js"
+```
+
+This is not laziness. `node --test` does not expand `**` globs on Linux, and passing a
+directory behaves differently across platforms and Node versions. Explicit paths are the
+only form that works identically on Windows, macOS and Linux. It was found the hard way:
+the first CI run failed only on the Linux runner while passing locally on Windows.
+
 The suite is run against Node 20 and 22 in CI. Avoid APIs newer than 20.
 
 Tests assert on real numbers, not just "it does not throw". When you change metric
