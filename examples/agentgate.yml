@@ -1,0 +1,23 @@
+# AgentGate example configuration.
+# Uses the deterministic mock agent, so it costs nothing and always returns the
+# same numbers. Replace "runner" with a module that calls your real agent.
+
+k: 5
+temperature: 1.0
+seed: 42
+concurrency: 4
+timeoutMs: 10000
+
+grader: contains
+
+# The mock agent ships in the package so `npm run example` works on a clean clone.
+# For your own agent, point this at your compiled runner module instead.
+runner: ../dist/example-runner/mock-agent.js
+
+thresholds:
+  hard: 0.5
+  maxMeanRegression: 0.08
+
+baseline: ./.agentgate/example-baseline.json
+
+suite: ./tasks.yml
